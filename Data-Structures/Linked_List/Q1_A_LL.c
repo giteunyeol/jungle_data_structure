@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
-/* CE1007/CZ1007 Data Structures
-Lab Test: Section A - Linked List Questions
-Purpose: Implementing the required functions for Question 1 */
+/* CE1007/CZ1007 자료구조
+실습 시험: 섹션 A - 연결 리스트 문제
+목적: 문제 1에 필요한 함수를 구현 */
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -14,17 +14,17 @@ Purpose: Implementing the required functions for Question 1 */
 typedef struct _listnode{
 	int item;
 	struct _listnode *next;
-} ListNode;			// You should not change the definition of ListNode
+} ListNode;			// 이 정의를 변경하면 안 됩니다
 
 typedef struct _linkedlist{
 	int size;
 	ListNode *head;
-} LinkedList;			// You should not change the definition of LinkedList
+} LinkedList;			// 이 정의를 변경하면 안 됩니다
 
 
-///////////////////////// function prototypes ////////////////////////////////////
+///////////////////////// 함수 원형 선언 ////////////////////////////////////
 
-//You should not change the prototype of this function
+// 이 함수의 원형은 변경하면 안 됩니다
 int insertSortedLL(LinkedList *ll, int item);
 
 void printList(LinkedList *ll);
@@ -34,7 +34,7 @@ int insertNode(LinkedList *ll, int index, int value);
 int removeNode(LinkedList *ll, int index);
 
 
-//////////////////////////// main() //////////////////////////////////////////////
+//////////////////////////// 메인 함수 //////////////////////////////////////////////
 
 int main()
 {
@@ -42,7 +42,7 @@ int main()
 	int c, i, j;
 	c = 1;
 
-	//Initialize the linked list 1 as an empty linked list
+	// 연결 리스트 1을 빈 연결 리스트로 초기화
 	ll.head = NULL;
 	ll.size = 0;
 
@@ -90,7 +90,7 @@ int main()
 
 int insertSortedLL(LinkedList *ll, int item)
 {
-	/* add your code here */
+	/* 여기에 코드를 작성하세요 */
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -157,7 +157,7 @@ int insertNode(LinkedList *ll, int index, int value){
 	if (ll == NULL || index < 0 || index > ll->size + 1)
 		return -1;
 
-	// If empty list or inserting first node, need to update head pointer
+	// 리스트가 비어 있거나 첫 노드를 삽입하는 경우 시작 포인터를 갱신해야 함
 	if (ll->head == NULL || index == 0){
 		cur = ll->head;
 		ll->head = malloc(sizeof(ListNode));
@@ -168,8 +168,8 @@ int insertNode(LinkedList *ll, int index, int value){
 	}
 
 
-	// Find the nodes before and at the target position
-	// Create a new node and reconnect the links
+	// 대상 위치의 이전 노드와 해당 위치 노드를 찾음
+	// 새 노드를 만들고 링크를 다시 연결함
 	if ((pre = findNode(ll, index - 1)) != NULL){
 		cur = pre->next;
 		pre->next = malloc(sizeof(ListNode));
@@ -187,11 +187,11 @@ int removeNode(LinkedList *ll, int index){
 
 	ListNode *pre, *cur;
 
-	// Highest index we can remove is size-1
+	// 삭제 가능한 최대 인덱스는 현재 크기-1임
 	if (ll == NULL || index < 0 || index >= ll->size)
 		return -1;
 
-	// If removing first node, need to update head pointer
+	// 첫 번째 노드를 삭제하는 경우 시작 포인터를 갱신해야 함
 	if (index == 0){
 		cur = ll->head->next;
 		free(ll->head);
@@ -201,8 +201,8 @@ int removeNode(LinkedList *ll, int index){
 		return 0;
 	}
 
-	// Find the nodes before and after the target position
-	// Free the target node and reconnect the links
+	// 대상 위치의 이전 노드와 다음 노드를 찾음
+	// 대상 노드를 해제하고 링크를 다시 연결함
 	if ((pre = findNode(ll, index - 1)) != NULL){
 
 		if (pre->next == NULL)
