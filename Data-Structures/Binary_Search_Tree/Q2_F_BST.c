@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
-/* CE1007/CZ1007 자료구조
-실습 시험: 섹션 F - 이진 탐색 트리 문제
-목적: 문제 2에 필요한 함수를 구현 */
+/* CE1007/CZ1007 Data Structures
+Lab Test: Section F - Binary Search Trees Questions
+Purpose: Implementing the required functions for Question 2 */
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -15,21 +15,21 @@ typedef struct _bstnode{
 	int item;
 	struct _bstnode *left;
 	struct _bstnode *right;
-} BSTNode;   // 이 정의를 변경하면 안 됩니다
+} BSTNode;   // You should not change the definition of BSTNode
 
 typedef struct _stackNode{
 	BSTNode *data;
 	struct _stackNode *next;
-}StackNode; // 이 정의를 변경하면 안 됩니다
+}StackNode; // You should not change the definition of StackNode
 
 typedef struct _stack
 {
 	StackNode *top;
-}Stack; // 이 정의를 변경하면 안 됩니다
+}Stack; // You should not change the definition of Stack
 
-///////////////////////// 함수 원형 선언 ////////////////////////////////////
+///////////////////////// function prototypes ////////////////////////////////////
 
-// 이 함수들의 원형은 변경하면 안 됩니다
+// You should not change the prototypes of these functions
 void inOrderTraversal(BSTNode *node);
 
 void insertBSTNode(BSTNode **node, int value);
@@ -40,14 +40,14 @@ BSTNode *peek(Stack *s);
 int isEmpty(Stack *s);
 void removeAll(BSTNode **node);
 
-///////////////////////////// 메인 함수 /////////////////////////////////////////////
+///////////////////////////// main() /////////////////////////////////////////////
 
 int main()
 {
 	int c, i;
 	c = 1;
 
-	// 이진 탐색 트리를 빈 이진 탐색 트리로 초기화
+	//Initialize the Binary Search Tree as an empty Binary Search Tree
 	BSTNode *root;
 	root = NULL;
 
@@ -70,7 +70,7 @@ int main()
 			break;
 		case 2:
 			printf("The resulting in-order traversal of the binary search tree is: ");
-			inOrderTraversal(root); // 이 함수는 직접 구현해야 합니다
+			inOrderTraversal(root); // You need to code this function
 			printf("\n");
 			break;
 		case 0:
@@ -90,7 +90,7 @@ int main()
 
 void inOrderTraversal(BSTNode *root)
 {
-	 /* 여기에 코드를 작성하세요 */
+	 /* add your code here */
 }
 
 ///////////////////////////////////////////////////////////////////////////////

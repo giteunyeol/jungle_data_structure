@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
-/* CE1007/CZ1007 자료구조
-실습 시험: 섹션 E - 이진 트리 문제
-목적: 문제 6에 필요한 함수를 구현 */
+/* CE1007/CZ1007 Data Structures
+Lab Test: Section E - Binary Trees Questions
+Purpose: Implementing the required functions for Question 6 */
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -16,7 +16,7 @@ typedef struct _btnode
     int item;
     struct _btnode *left;
     struct _btnode *right;
-} BTNode;   // 이 정의를 변경하면 안 됩니다
+} BTNode;   // You should not change the definition of BTNode
 
 /////////////////////////////////////////////////////////////////////////////////
 
@@ -32,9 +32,9 @@ typedef struct _stack
 } Stack;
 
 
-///////////////////////// 함수 원형 선언 ////////////////////////////////////
+///////////////////////// function prototypes ////////////////////////////////////
 
-// 이 함수들의 원형은 변경하면 안 됩니다
+// You should not change the prototypes of these functions
 void printSmallerValues(BTNode *node, int m);
 
 BTNode *createBTNode(int item);
@@ -46,7 +46,7 @@ BTNode* pop(Stack *stack);
 void printTree(BTNode *node);
 void removeAll(BTNode **node);
 
-///////////////////////////// 메인 함수 /////////////////////////////////////////////
+///////////////////////////// main() /////////////////////////////////////////////
 
 int main()
 {
@@ -105,7 +105,7 @@ int main()
 
 void printSmallerValues(BTNode *node, int m)
 {
-	/* 여기에 코드를 작성하세요 */
+	/* add your code here */
 }
 
 //////////////////////////////////////////////////////////////////////////////////

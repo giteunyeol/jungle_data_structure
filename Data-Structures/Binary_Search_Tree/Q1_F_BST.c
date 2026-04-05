@@ -1,9 +1,9 @@
 
 //////////////////////////////////////////////////////////////////////////////////
 
-/* CE1007/CZ1007 자료구조
-실습 시험: 섹션 F - 이진 탐색 트리 문제
-목적: 문제 1에 필요한 함수를 구현 */
+/* CE1007/CZ1007 Data Structures
+Lab Test: Section F - Binary Search Trees Questions
+Purpose: Implementing the required functions for Question 1 */
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -17,23 +17,23 @@ typedef struct _bstnode{
 	int item;
 	struct _bstnode *left;
 	struct _bstnode *right;
-} BSTNode;   // 이 정의를 변경하면 안 됩니다
+} BSTNode;   // You should not change the definition of BSTNode
 
 typedef struct _QueueNode {
 	BSTNode *data;
 	struct _QueueNode *nextPtr;
-}QueueNode; // 이 정의를 변경하면 안 됩니다
+}QueueNode; // You should not change the definition of QueueNode
 
 
 typedef struct _queue
 {
 	QueueNode *head;
 	QueueNode *tail;
-}Queue; // 이 정의를 변경하면 안 됩니다
+}Queue; // You should not change the definition of Queue
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-// 이 함수들의 원형은 변경하면 안 됩니다
+// You should not change the prototypes of these functions
 void levelOrderTraversal(BSTNode *node);
 
 void insertBSTNode(BSTNode **node, int value);
@@ -43,14 +43,14 @@ void enqueue(QueueNode **head, QueueNode **tail, BSTNode *node);
 int isEmpty(QueueNode *head);
 void removeAll(BSTNode **node);
 
-///////////////////////////// 메인 함수 /////////////////////////////////////////////
+///////////////////////////// main() /////////////////////////////////////////////
 
 int main()
 {
 	int c, i;
 	c = 1;
 
-	// 이진 탐색 트리를 빈 이진 탐색 트리로 초기화
+	//Initialize the Binary Search Tree as an empty Binary Search Tree
 	BSTNode *root;
 	root = NULL;
 
@@ -73,7 +73,7 @@ int main()
 			break;
 		case 2:
 			printf("The resulting level-order traversal of the binary search tree is: ");
-			levelOrderTraversal(root); // 이 함수는 직접 구현해야 합니다
+			levelOrderTraversal(root); // You need to code this function
 			printf("\n");
 			break;
 		case 0:
@@ -94,7 +94,7 @@ int main()
 void levelOrderTraversal(BSTNode* root)
 {
 
-    /* 여기에 코드를 작성하세요 */
+    /* add your code here */
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -127,22 +127,22 @@ void insertBSTNode(BSTNode **node, int value){
 
 //////////////////////////////////////////////////////////////////////////////////
 
-// 노드를 큐에 삽입
+// enqueue node
 void enqueue(QueueNode **headPtr, QueueNode **tailPtr, BSTNode *node)
 {
-	// 메모리를 동적으로 할당
+	// dynamically allocate memory
 	QueueNode *newPtr = malloc(sizeof(QueueNode));
 
-	// 포인터 할당이 성공했다면
+	// if newPtr does not equal NULL
 	if (newPtr != NULL) {
 		newPtr->data = node;
 		newPtr->nextPtr = NULL;
 
-		// 큐가 비어 있으면 맨 앞에 삽입
+		// if queue is empty, insert at head
 		if (isEmpty(*headPtr)) {
 			*headPtr = newPtr;
 		}
-		else { // 맨 뒤에 삽입
+		else { // insert at tail
 			(*tailPtr)->nextPtr = newPtr;
 		}
 

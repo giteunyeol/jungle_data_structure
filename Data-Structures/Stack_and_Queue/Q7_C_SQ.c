@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
-/* CE1007/CZ1007 자료구조
-실습 시험: 섹션 C - 스택과 큐 문제
-목적: 문제 7에 필요한 함수를 구현 */
+/* CE1007/CZ1007 Data Structures
+Lab Test: Section C - Stack and Queue Questions
+Purpose: Implementing the required functions for Question 7 */
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -17,23 +17,23 @@ typedef struct _listnode
 {
 	int item;
 	struct _listnode *next;
-} ListNode;	// 이 정의를 변경하면 안 됩니다
+} ListNode;	// You should not change the definition of ListNode
 
 typedef struct _linkedlist
 {
 	int size;
 	ListNode *head;
-} LinkedList;	// 이 정의를 변경하면 안 됩니다
+} LinkedList;	// You should not change the definition of LinkedList
 
 
 typedef struct stack
 {
 	LinkedList ll;
-} Stack; // 이 정의를 변경하면 안 됩니다
+} Stack; // You should not change the definition of Stack
 
-///////////////////////// 함수 원형 선언 ////////////////////////////////////
+///////////////////////// function prototypes ////////////////////////////////////
 
-// 이 함수들의 원형은 변경하면 안 됩니다
+// You should not change the prototypes of these functions
 int balanced(char *expression);
 
 void push(Stack *s, int item);
@@ -48,7 +48,7 @@ ListNode * findNode(LinkedList *ll, int index);
 int insertNode(LinkedList *ll, int index, int value);
 int removeNode(LinkedList *ll, int index);
 
-//////////////////////////// 메인 함수 //////////////////////////////////////////////
+//////////////////////////// main() //////////////////////////////////////////////
 
 int main()
 {
@@ -59,11 +59,11 @@ int main()
 	LinkedList ll;
 	Stack s;
 
-	// 연결 리스트를 빈 연결 리스트로 초기화
+	// Initialize the linked list as an empty linked list
 	ll.head = NULL;
 	ll.size = 0;
 
-	// 스택을 빈 스택으로 초기화
+	// Initialize the stack as an empty stack
 	s.ll.head = NULL;
 	s.ll.size = 0;
 
@@ -104,7 +104,7 @@ int main()
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
 {
-/* 여기에 코드를 작성하세요 */
+/* add your code here */
 }
 
 ////////////////////////////////////////////////////////////
@@ -216,7 +216,7 @@ int insertNode(LinkedList *ll, int index, int value){
 	if (ll == NULL || index < 0 || index > ll->size + 1)
 		return -1;
 
-	// 리스트가 비어 있거나 첫 노드를 삽입하는 경우 시작 포인터를 갱신해야 함
+	// If empty list or inserting first node, need to update head pointer
 	if (ll->head == NULL || index == 0){
 		cur = ll->head;
 		ll->head = malloc(sizeof(ListNode));
@@ -231,8 +231,8 @@ int insertNode(LinkedList *ll, int index, int value){
 	}
 
 
-	// 대상 위치의 이전 노드와 해당 위치 노드를 찾음
-	// 새 노드를 만들고 링크를 다시 연결함
+	// Find the nodes before and at the target position
+	// Create a new node and reconnect the links
 	if ((pre = findNode(ll, index - 1)) != NULL){
 		cur = pre->next;
 		pre->next = malloc(sizeof(ListNode));
@@ -254,11 +254,11 @@ int removeNode(LinkedList *ll, int index){
 
 	ListNode *pre, *cur;
 
-	// 삭제 가능한 최대 인덱스는 현재 크기-1임
+	// Highest index we can remove is size-1
 	if (ll == NULL || index < 0 || index >= ll->size)
 		return -1;
 
-	// 첫 번째 노드를 삭제하는 경우 시작 포인터를 갱신해야 함
+	// If removing first node, need to update head pointer
 	if (index == 0){
 		cur = ll->head->next;
 		free(ll->head);
@@ -267,8 +267,8 @@ int removeNode(LinkedList *ll, int index){
 		return 0;
 	}
 
-	// 대상 위치의 이전 노드와 다음 노드를 찾음
-	// 대상 노드를 해제하고 링크를 다시 연결함
+	// Find the nodes before and after the target position
+	// Free the target node and reconnect the links
 	if ((pre = findNode(ll, index - 1)) != NULL){
 
 		if (pre->next == NULL)
