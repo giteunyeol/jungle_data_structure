@@ -112,7 +112,18 @@ int main()
 
 void reverse(Queue *q)
 {
-/* add your code here */
+	Stack stk;
+	stk.ll.head = NULL;
+	stk.ll.tail = NULL;
+	stk.ll.size = 0;
+	while (!isEmptyQueue(q)) //큐가 빌때까지 큐에서 디큐한걸 스택에 푸쉬
+	{
+		push(&stk, dequeue(q)); 
+	}
+	while(!isEmptyStack(&stk))
+	{
+		enqueue(q, pop(&stk)); // 스택에서 다시 꺼내서 큐에 푸쉬
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

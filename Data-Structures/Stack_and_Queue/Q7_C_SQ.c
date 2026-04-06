@@ -104,7 +104,56 @@ int main()
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
 {
-/* add your code here */
+	Stack s;
+	s.ll.head = NULL;
+	s.ll.size = 0;
+
+	int idx = 0;
+	while(expression[idx] != '\0')
+	{
+		if(expression[idx] == '(' || expression[idx] ==  '[' || expression[idx] == '{') // 왼쪽괄호면 무조건 푸쉬
+		{
+			push(&s, expression[idx]);
+		}
+		else if(expression[idx] == ')')
+		{
+			if(peek(&s) == '(') // 뺄 수 있는 경우
+			{
+				pop(&s);
+			}
+			else
+			{
+				return 1; //밸런스 아님
+			}
+		}
+		else if (expression[idx] == '}')
+		{
+			if (peek(&s) == '{') // 뺄 수 있는 경우
+			{
+				pop(&s);
+			}
+			else
+			{
+				return 1; // 밸런스 아님
+			}
+		}
+		else //expression[idx] == ']'
+		{
+			if (peek(&s) == '[') // 뺄 수 있는 경우
+			{
+				pop(&s);
+			}
+			else
+			{
+				return 1; // 밸런스 아님
+			}
+		}
+		idx++;
+	}
+
+	//다 통과
+	if(isEmptyStack(&s)) { return 0;} //통과했는데 비어있으면 밸런스임
+	return 1; //밸런스임
 }
 
 ////////////////////////////////////////////////////////////
