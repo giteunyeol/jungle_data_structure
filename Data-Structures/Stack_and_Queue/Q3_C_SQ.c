@@ -103,7 +103,23 @@ int main()
 
 int isStackPairwiseConsecutive(Stack *s)
 {
-  /* add your code here */
+	//return 1이면 두개씩 짝지었을때 연속수, return 0이면 두개씩 짝지었을때 연속수x
+	
+	while(isEmptyStack(s) != 1)
+	{
+		int num1 = pop(s);
+		if(isEmptyStack(s) == 1)
+		{
+			return 0; // 스택의 갯수가 홀수로 들어있었으면 바로 0 리턴
+		}
+		int num2 = pop(s);
+		
+		if(abs(num1 - num2) != 1) //차이가 1이 아니면
+		{
+			return 0;
+		}
+	}
+	return 1; //다 통과하면 1 리턴
 }
 
 //////////////////////////////////////////////////////////////////////////////////
