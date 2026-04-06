@@ -15,14 +15,13 @@ typedef struct _listnode
 {
 	int item;
 	struct _listnode *next;
-} ListNode;			// You should not change the definition of ListNode
+} ListNode; // You should not change the definition of ListNode
 
 typedef struct _linkedlist
 {
 	int size;
 	ListNode *head;
-} LinkedList;			// You should not change the definition of LinkedList
-
+} LinkedList; // You should not change the definition of LinkedList
 
 //////////////////////// function prototypes /////////////////////////////////////
 
@@ -31,7 +30,7 @@ void moveOddItemsToBack(LinkedList *ll);
 
 void printList(LinkedList *ll);
 void removeAllItems(LinkedList *ll);
-ListNode * findNode(LinkedList *ll, int index);
+ListNode *findNode(LinkedList *ll, int index);
 int insertNode(LinkedList *ll, int index, int value);
 int removeNode(LinkedList *ll, int index);
 
@@ -42,10 +41,9 @@ int main()
 	LinkedList ll;
 	int c, i, j;
 	c = 1;
-	//Initialize the linked list 1 as an empty linked list
+	// Initialize the linked list 1 as an empty linked list
 	ll.head = NULL;
 	ll.size = 0;
-
 
 	printf("1: Insert an integer to the linked list:\n");
 	printf("2: Move all odd integers to the back of the linked list:\n");
@@ -86,12 +84,135 @@ int main()
 
 void moveOddItemsToBack(LinkedList *ll)
 {
-	/* add your code here */
+
+	ListNode *save[10000];
+	int save_cnt = 0;
+
+	ListNode *prev = NULL;
+	ListNode *cur = ll->head;
+	ListNode *tail;
+	int i;
+
+	if (ll == NULL || ll->head == NULL)
+		return;
+
+	while (cur != NULL)
+	{
+		if (cur->item % 2 == 1) // 홀수면 저장하고 원래 리스트에서 제거
+		{
+			save[save_cnt++] = cur;
+
+			if (prev == NULL) // head가 가리키는 값이 홀수인 경우
+			{
+				ll->head = cur->next;
+				cur = ll->head;
+			}
+			else
+			{
+				prev->next = cur->next;
+				cur = prev->next;
+			}
+		}
+		else // 짝수면 그대로 진행
+		{
+			prev = cur;
+			cur = cur->next;
+		}
+	}
+
+	// 홀수가 하나도 없으면 끝
+	if (save_cnt == 0)
+		return;
+
+	// 저장한 홀수 노드들끼리 다시 연결
+	for (i = 0; i < save_cnt - 1; i++)
+		save[i]->next = save[i + 1];
+	save[save_cnt - 1]->next = NULL;
+
+	// 짝수가 하나도 없었던 경우
+	if (ll->head == NULL)
+	{
+		ll->head = save[0];
+		return;
+	}
+
+	// 현재 짝수 리스트의 마지막 노드 찾기
+	tail = ll->head;
+	while (tail->next != NULL)
+		tail = tail->next;
+
+	// 짝수 뒤에 홀수 연결
+	tail->next = save[0];
+
+/*
+GPT방식
+void moveOddItemsToBack(LinkedList *ll)
+{
+	ListNode *cur;
+	ListNode *nextNode;
+
+	ListNode *evenHead = NULL;
+	ListNode *evenTail = NULL;
+	ListNode *oddHead = NULL;
+	ListNode *oddTail = NULL;
+
+	if (ll == NULL || ll->head == NULL)
+		return;
+
+	cur = ll->head;
+
+	while (cur != NULL)
+	{
+		nextNode = cur->next;
+		cur->next = NULL;
+
+		if (cur->item % 2 == 0)   // 짝수
+		{
+			if (evenHead == NULL)
+			{
+				evenHead = cur;
+				evenTail = cur;
+			}
+			else
+			{
+				evenTail->next = cur;
+				evenTail = cur;
+			}
+		}
+		else   // 홀수
+		{
+			if (oddHead == NULL)
+			{
+				oddHead = cur;
+				oddTail = cur;
+			}
+			else
+			{
+				oddTail->next = cur;
+				oddTail = cur;
+			}
+		}
+
+		cur = nextNode;
+	}
+
+	if (evenHead == NULL)   // 전부 홀수인 경우
+	{
+		ll->head = oddHead;
+	}
+	else
+	{
+		ll->head = evenHead;
+		evenTail->next = oddHead;
+	}
+}
+*/
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-void printList(LinkedList *ll){
+void printList(LinkedList *ll)
+{
 
 	ListNode *cur;
 	if (ll == NULL)
@@ -108,13 +229,13 @@ void printList(LinkedList *ll){
 	printf("\n");
 }
 
-
 void removeAllItems(LinkedList *ll)
 {
 	ListNode *cur = ll->head;
 	ListNode *tmp;
 
-	while (cur != NULL){
+	while (cur != NULL)
+	{
 		tmp = cur->next;
 		free(cur);
 		cur = tmp;
@@ -123,8 +244,8 @@ void removeAllItems(LinkedList *ll)
 	ll->size = 0;
 }
 
-
-ListNode *findNode(LinkedList *ll, int index){
+ListNode *findNode(LinkedList *ll, int index)
+{
 
 	ListNode *temp;
 
@@ -136,7 +257,8 @@ ListNode *findNode(LinkedList *ll, int index){
 	if (temp == NULL || index < 0)
 		return NULL;
 
-	while (index > 0){
+	while (index > 0)
+	{
 		temp = temp->next;
 		if (temp == NULL)
 			return NULL;
@@ -146,7 +268,8 @@ ListNode *findNode(LinkedList *ll, int index){
 	return temp;
 }
 
-int insertNode(LinkedList *ll, int index, int value){
+int insertNode(LinkedList *ll, int index, int value)
+{
 
 	ListNode *pre, *cur;
 
@@ -154,7 +277,8 @@ int insertNode(LinkedList *ll, int index, int value){
 		return -1;
 
 	// If empty list or inserting first node, need to update head pointer
-	if (ll->head == NULL || index == 0){
+	if (ll->head == NULL || index == 0)
+	{
 		cur = ll->head;
 		ll->head = malloc(sizeof(ListNode));
 		ll->head->item = value;
@@ -163,10 +287,10 @@ int insertNode(LinkedList *ll, int index, int value){
 		return 0;
 	}
 
-
 	// Find the nodes before and at the target position
 	// Create a new node and reconnect the links
-	if ((pre = findNode(ll, index - 1)) != NULL){
+	if ((pre = findNode(ll, index - 1)) != NULL)
+	{
 		cur = pre->next;
 		pre->next = malloc(sizeof(ListNode));
 		pre->next->item = value;
@@ -178,8 +302,8 @@ int insertNode(LinkedList *ll, int index, int value){
 	return -1;
 }
 
-
-int removeNode(LinkedList *ll, int index){
+int removeNode(LinkedList *ll, int index)
+{
 
 	ListNode *pre, *cur;
 
@@ -188,7 +312,8 @@ int removeNode(LinkedList *ll, int index){
 		return -1;
 
 	// If removing first node, need to update head pointer
-	if (index == 0){
+	if (index == 0)
+	{
 		cur = ll->head->next;
 		free(ll->head);
 		ll->head = cur;
@@ -199,7 +324,8 @@ int removeNode(LinkedList *ll, int index){
 
 	// Find the nodes before and after the target position
 	// Free the target node and reconnect the links
-	if ((pre = findNode(ll, index - 1)) != NULL){
+	if ((pre = findNode(ll, index - 1)) != NULL)
+	{
 
 		if (pre->next == NULL)
 			return -1;

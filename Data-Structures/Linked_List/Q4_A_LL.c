@@ -86,7 +86,64 @@ int main()
 
 void moveEvenItemsToBack(LinkedList *ll)
 {
-	/* add your code here */
+	ListNode *save[10000]; //좀 더 발전시키려면 동적으로 넣어도 될듯
+	int save_cnt = 0;
+
+	ListNode *prev = NULL;
+	ListNode *cur = ll->head;
+	ListNode *tail;
+	int i;
+
+	if (ll == NULL || ll->head == NULL)
+		return;
+
+	while (cur != NULL)
+	{
+		if (cur->item % 2 == 0) // 짝수면 저장하고 원래 리스트에서 제거
+		{
+			save[save_cnt++] = cur;
+
+			if (prev == NULL) // head가 가리키는 값이 짝수인 경우
+			{
+				ll->head = cur->next;
+				cur = ll->head;
+			}
+			else
+			{
+				prev->next = cur->next;
+				cur = prev->next;
+			}
+		}
+		else // 홀수면 그대로 진행
+		{
+			prev = cur;
+			cur = cur->next;
+		}
+	}
+
+	// 짝수가 하나도 없으면 끝
+	if (save_cnt == 0)
+		return;
+
+	// 저장한 짝수 노드들끼리 다시 연결
+	for (i = 0; i < save_cnt - 1; i++)
+		save[i]->next = save[i + 1];
+	save[save_cnt - 1]->next = NULL;
+
+	// 홀수가 하나도 없었던 경우
+	if (ll->head == NULL)
+	{
+		ll->head = save[0];
+		return;
+	}
+
+	// 현재 홀수 리스트의 마지막 노드 찾기
+	tail = ll->head;
+	while (tail->next != NULL)
+		tail = tail->next;
+
+	// 홀수 뒤에 짝수 연결
+	tail->next = save[0];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
