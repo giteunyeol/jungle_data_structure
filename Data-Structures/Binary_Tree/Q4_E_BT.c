@@ -101,9 +101,42 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 int sumOfOddNodes(BTNode *node)
-
 {
-    /* add your code here */
+    if(node == NULL) { return 0; }
+
+    if(node->right == NULL && node -> left != NULL) // right가 비고 left가 차있을때
+    {
+        if(node -> item % 2 == 1)
+        {
+            return sumOfOddNodes(node->left) + node->item;
+        }
+        else
+        {
+            return sumOfOddNodes(node->left);
+        }
+    }
+    else if (node->right != NULL && node->left == NULL) //left가 있고 right가 비었을때
+    {
+        if (node->item % 2 == 1)
+        {
+            return sumOfOddNodes(node->right) + node->item;
+        }
+        else 
+        {
+            return sumOfOddNodes(node->right);
+        }
+    }
+    else //양쪽 있을때 
+    {
+        if(node -> item % 2 == 1)
+        {
+            return sumOfOddNodes(node->left) + sumOfOddNodes(node->right) + node -> item;
+        }
+        else 
+        {
+            return sumOfOddNodes(node->left) + sumOfOddNodes(node->right);
+        }
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////

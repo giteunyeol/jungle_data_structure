@@ -99,9 +99,22 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 int countOneChildNodes(BTNode *node)
-
 {
-    /* add your code here */
+    if(node == NULL) //비었다면
+    { return 0;}
+
+    if(node->left == NULL && node -> right != NULL) // 왼쪽이 비고 오른쪽만 있다면
+    {
+        return countOneChildNodes(node -> right) + 1;
+    }
+    else if(node->left != NULL && node -> right == NULL) // 오른쪽이 비고 왼쪽만 있다면   
+    {
+        return countOneChildNodes(node -> left) + 1;
+    }
+    else //양쪽 다 있다면
+    {
+        return countOneChildNodes(node -> left) + countOneChildNodes(node -> right);
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

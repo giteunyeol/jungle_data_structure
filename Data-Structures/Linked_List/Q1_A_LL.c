@@ -174,13 +174,7 @@ ListNode *findNode(LinkedList *ll, int index)
 
 	ListNode *temp;
 
-	if (ll == NULL || index < 0 || index >= ll->size)
-		return NULL;
-
 	temp = ll->head;
-
-	if (temp == NULL || index < 0)
-		return NULL;
 
 	while (index > 0)
 	{
